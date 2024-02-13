@@ -1,16 +1,18 @@
 import * as React from "react"
-import Layout from "../components/Layout"
-import Seo from "../components/Seo"
-import { graphql } from "gatsby"
+import Layout from "../../components/Layout"
+import Seo from "../../components/Seo"
+import { Link, graphql } from "gatsby"
 
-const Blog = ({ data }) => {
+const Index = ({ data }) => {
   return (
-    <Layout pageTitle="My Blog Posts">
+    <Layout pageTitle="My Index Posts">
       <p>我的部落格頁面</p>
       {data.allMdx.nodes.map((d) => {
         return (
           <article key={d.id}>
-            <h2>{d.frontmatter.title}</h2>
+            <Link to={`/blog/${d.frontmatter.slug}`}>
+              {d.frontmatter.title}
+            </Link>
             <p>Posted: {d.frontmatter.date}</p>
             <p>{d.excerpt}</p>
           </article>
@@ -42,4 +44,4 @@ export const query = graphql`
     }
   }
 `
-export default Blog
+export default Index
